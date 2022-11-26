@@ -1,0 +1,140 @@
+.button1{
+    -fx-background-color:
+            linear-gradient(#f2f2f2, #d6d6d6),
+            linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+            linear-gradient(#dddddd 0%, #f6f6f6 50%);
+    -fx-text-fill: black;
+    -fx-alignment: LEFT;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font: bold 10pt "Arial";
+    -fx-pref-height: 60;
+    -fx-pref-width: 150;
+}
+
+
+.combo-box .cell{
+    -fx-background-color: #6f0404;
+    -fx-text-fill: BLACK;
+    -fx-border-color: #dcab00;
+}
+
+
+.button_creature{
+    -fx-background-color: #301204;
+    -fx-text-fill: white;
+    -fx-min-height:48;
+    -fx-min-width: 53;
+    -fx-max-height: 48;
+    -fx-max-width: 53;
+    -fx-font: bold 6pt "Arial";
+}
+
+.BoxSkills{
+    -fx-min-height: 82;
+    -fx-min-width: 120;
+    -fx-max-height: 82;
+    -fx-max-width: 120;
+    -fx-font: bold 6pt "Arial";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.BoxSpells{
+    -fx-min-height: 82;
+    -fx-min-width: 100;
+    -fx-max-height: 82;
+    -fx-max-width: 100;
+    -fx-font: bold 5pt "Arial";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.DefaultFraction{
+    -fx-font: bold 10pt "Arial";
+    -fx-text-fill: WHITE;
+}
+
+
+.button_aritfact{
+    -fx-background-color: #301204;
+}
+
+
+
+.labelHero{
+    -fx-font: bold 12pt "Arial";
+    -fx-text-fill: black;
+}
+
+.labelFraction{
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: #c68900;
+}
+
+
+.ReadyButton{
+    -fx-background-color:
+            linear-gradient(#f2f2f2, #d6d6d6),
+            linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+            linear-gradient(#dddddd 0%, #f6f6f6 50%);
+    -fx-text-fill: black;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font: bold 10pt "Arial";
+}
+
+
+.label {
+    -fx-font: bold 15pt "Arial";
+    -fx-padding: 5px
+}
+
+.labelShop{
+    -fx-font: 9pt "Arial";
+    -fx-pref-height: 50;
+}
+
+.centerHBoxLeft {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-pref-width: 600;
+}
+
+.centerHBoxRight {
+    /*-fx-border-color: black;*/
+    -fx-border-width: 1;
+    -fx-min-width: 270;
+    -fx-max-width: 270;
+    -fx-pref-height: 200;
+}
+
+.centerHBoxGrey {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+    -fx-background-color: GREY;
+}
+
+.centerHBox{
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-pref-width: 700;
+}
+
+
+.slider {
+    -fx-padding: 50 10 10 10;
+}
+
+.slider .track {
+    -fx-pref-height:20;
+}
+
+.slider .thumb {
+    -fx-pref-height: 30;
+    -fx-pref-width: 10;
+}
+
+#readyButton{
+    -fx-pref-width: 1600;
+    -fx-pref-height: 30;
+}
