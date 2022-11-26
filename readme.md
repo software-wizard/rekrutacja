@@ -27,15 +27,14 @@
    Punkt wejścia `CastleCreatureFactory#create`.
    Aby włożyć te jednostkę na planszę należy podmienić implementacje metody `Start#createP1` lub `Start#P2`, tak by
    korzystała z `CastleCreatureFactory`.
-    1.
-        1. `CreatureStatistic.GRIFFIN` potrafi oddać 2 razy na turę
-        2. `CreatureStatistic.MARKSMAN` jako jednostka strzelająca oddająca 2 strzały (zauważ proszę że jest to coś
-           zupełnie innego niż podwójne obrażenia)
-        3. `CreatureStatistic.CHAMPION` dodatkowe obrażenia w zależności od pokonanego dystansu.
-        4. `CreatureStatistic.ANGEL` dodatkowe obrażenia dla jednostki Devil z inforno(aktualnie nie istnieje, możesz
-           wybrać dowolną inną zaimplementowaną jednostkę np. 50% zwiększone obrażenia dla szkieletów
-           z `CreatureStatistic.SKELETON`)
-        5. `CreatureStatistic.ARCHANGEL` porafi wskrzesić jednostkę
+    1. `CreatureStatistic.GRIFFIN` potrafi oddać 2 razy na turę
+    2. `CreatureStatistic.MARKSMAN` jako jednostka strzelająca oddająca 2 strzały (zauważ proszę że jest to coś
+       zupełnie innego niż podwójne obrażenia)
+    3. `CreatureStatistic.CHAMPION` dodatkowe obrażenia w zależności od pokonanego dystansu.
+    4. `CreatureStatistic.ANGEL` dodatkowe obrażenia dla jednostki Devil z inforno(aktualnie nie istnieje, możesz
+       wybrać dowolną inną zaimplementowaną jednostkę np. 50% zwiększone obrażenia dla szkieletów
+       z `CreatureStatistic.SKELETON`)
+    5. `CreatureStatistic.ARCHANGEL` porafi wskrzesić jednostkę
 
 Oczekuję testów jednostkowych sprawdzających czy nowe jednostki zachowują się dokładnie tak jak tego oczekujemy.
 Przykłady w klasie `CreatureTest#creatureShouldHaveTwoCounters` oraz
