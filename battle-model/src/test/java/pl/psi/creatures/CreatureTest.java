@@ -588,6 +588,50 @@ public class CreatureTest {
         assertThat(defender.getCurrentHp()).isEqualTo(80);
         assertThat(doubleAttackCreature.getCurrentHp()).isEqualTo(6);
     }
+    @Test
+    void doubleAttackShooterShouldRangedAttackTwice() {
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        final ShooterCreatureDecoratorDoubleAttack attacker = new ShooterCreatureDecoratorDoubleAttack(decorated, 24);
+
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+
+        //can shoot
+        attacker.setInMelee(false);
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(100);
+        assertThat(defender.getCurrentHp()).isEqualTo(90);
+    }
+    @Test
+    void doubleAttackShooterShouldInMeleeAttackTwice(){
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        final ShooterCreatureDecoratorDoubleAttack attacker = new ShooterCreatureDecoratorDoubleAttack(decorated, 24);
+
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+
+
+            //can't shoot
+            attacker.setInMelee(true);
+            attacker.attack(defender);
+            assertThat(attacker.getCurrentHp()).isEqualTo(95);
+            assertThat(defender.getCurrentHp()).isEqualTo(98);
+
+    }
 
     @Test
     void creatureShouldHaveTwoCounters() {

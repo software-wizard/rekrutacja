@@ -52,7 +52,7 @@ public class CastleCreatureFactory {
                     Creature creature = new Creature.Builder().statistic(CreatureStatistic.MARKSMAN)
                             .amount(aAmount)
                             .build();
-                    return new ShooterCreatureDecorator( creature, 24 );
+                            return new ShooterCreatureDecoratorDoubleAttack(creature,24);
                 case 3:
                     return new Creature.Builder().statistic(CreatureStatistic.ROYAL_GRIFFIN)
                             .amount(aAmount)
