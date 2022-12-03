@@ -28,9 +28,10 @@ public class CastleCreatureFactory {
                     AreaDamageOnAttackCreatureDecorator areaDamageOnAttackCreature = new AreaDamageOnAttackCreatureDecorator( creature,area );
                     return new ShooterCreatureDecorator( areaDamageOnAttackCreature, 24 );
                 case 3:
-                    return new Creature.Builder().statistic(CreatureStatistic.GRIFFIN)
+                    Creature griffin =  new Creature.Builder().statistic(CreatureStatistic.GRIFFIN)
                             .amount(aAmount)
                             .build();
+                    return new MoreCounterAttacksCreatureDecorator(griffin,2);
                 case 4:
                     return new Creature.Builder().statistic(CreatureStatistic.SWORDSMAN)
                             .amount(aAmount)

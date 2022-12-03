@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.psi.Hero;
 import pl.psi.SpellsBook;
+import pl.psi.creatures.CastleCreatureFactory;
 import pl.psi.creatures.DefaultDamageCalculator;
 import pl.psi.creatures.WarMachinesFactory;
 import pl.psi.hero.HeroStatistics;
@@ -50,9 +51,7 @@ public class Start extends Application {
         Hero ret =
                 new Hero(List.of(
                         new WarMachinesFactory().create(1, 1, new DefaultDamageCalculator(new Random()), 1),
-                        new NecropolisFactory().create(false, 1, 5),
-                        new NecropolisFactory().create(true, 2, 5),
-                        new NecropolisFactory().create(false, 3, 5)
+               new CastleCreatureFactory().create(3, false, 15)
                 ), HeroStatistics.NECROMANCER,
                         SpellsBook.builder().spells(List.of(
                                 new SpellFactory().create(HASTE, BASIC, 2),
