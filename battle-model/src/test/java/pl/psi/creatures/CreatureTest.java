@@ -1,10 +1,12 @@
 package pl.psi.creatures;
 
+import static java.util.Map.entry;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -610,7 +612,7 @@ public class CreatureTest {
         assertThat(defender.getCurrentHp()).isEqualTo(90);
     }
     @Test
-    void doubleAttackShooterShouldInMeleeAttackTwice(){
+    void doubleAttackShooterShouldInMeleeAttackOnce(){
         final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(Range.closed(5, 5))
@@ -688,6 +690,55 @@ public class CreatureTest {
         turnQueue.next();
         assertThat(attacker.getTraversedFieldsNumber()).isEqualTo(0);
 
+    }
+    @Test
+    void cretureShouldDealMoreDamageForSomeUnits(){
+        //here defender is Skeleeton
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        Map<String, Double> units = Map.ofEntries(
+                entry("Devil",1.5),
+                entry("Skeleton",2.0)
+        );
+        final MoreDamageForSomeUnitsDecorator attacker = new MoreDamageForSomeUnitsDecorator(decorated,units);
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .name("Skeleton")
+                        .build())
+                .build();
+
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(95);
+        assertThat(defender.getCurrentHp()).isEqualTo(90);
+
+    }
+    @Test
+    void cretureShouldDealNormalDamageForSomeUnits(){
+        //here defender is not Skeleeton
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        Map<String, Double> units = Map.ofEntries(
+                entry("Devil",1.5),
+                entry("Skeleton",2.0)
+        );
+        final MoreDamageForSomeUnitsDecorator attacker = new MoreDamageForSomeUnitsDecorator(decorated,units);
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .name("Griffin")
+                        .build())
+                .build();
+
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(95);
+        assertThat(defender.getCurrentHp()).isEqualTo(95);
     }
 
     @Test

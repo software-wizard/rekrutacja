@@ -1,5 +1,10 @@
 package pl.psi.creatures;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static java.util.Map.entry;
+
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
@@ -41,6 +46,16 @@ public class CastleCreatureFactory {
                             .amount(aAmount)
                             .build();
                     return new ShooterCreatureDecorator( creature2, 12 );
+
+                case 7:
+                    Creature creature3 = new Creature.Builder().statistic(CreatureStatistic.ANGEL)
+                            .amount(aAmount)
+                            .build();
+                    Map<String, Double> units = Map.ofEntries(
+                            entry("Devil",1.5),
+                            entry("Skeleton",2.0)
+                    );
+                    return new MoreDamageForSomeUnitsDecorator(creature3,units);
             }
         } else {
             switch (aTier) {
