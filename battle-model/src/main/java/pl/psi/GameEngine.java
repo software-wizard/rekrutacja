@@ -199,6 +199,22 @@ public class GameEngine {
         pass();
         observerSupport.firePropertyChange(CREATURE_MOVED, null, null);
     }
+    public void resurrect(final Point aPoint) {
+        Creature creature = (Creature) turnQueue.getCurrentCreature();
+        board.getCreature(aPoint)
+                .ifPresent(creature::resurrect);
+        turnQueue.addDeadCreaturePoint(aPoint);
+        pass();
+        observerSupport.firePropertyChange(CREATURE_MOVED, null, null);
+    }
+    public boolean canResurrect(final Point aPoint){
+        if(getCreature(aPoint).isPresent()
+                && !getCreature(aPoint).get().isAlive()
+                && isCreatureAllied(getCreature(aPoint).get())
+                && getCurrentCreature().getResurrectionActions()>0){
+            return true;
+        }else {return false;}
+    }
 
     public String getAttackInformation() {
         return attackInformation;
@@ -436,7 +452,7 @@ public class GameEngine {
     }
 
 
-    private boolean isCreatureAllied(Creature creature) {
+    public boolean isCreatureAllied(Creature creature) {
         return getCurrentHero().getCreatures().contains(creature);
     }
 

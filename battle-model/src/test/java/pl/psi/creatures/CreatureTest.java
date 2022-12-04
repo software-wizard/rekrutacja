@@ -740,6 +740,83 @@ public class CreatureTest {
         assertThat(attacker.getCurrentHp()).isEqualTo(95);
         assertThat(defender.getCurrentHp()).isEqualTo(95);
     }
+    @Test
+    void creatureShouldResurrect(){
+        final Creature resurector = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .amount(2)
+                .build();
+        resurector.setResurrectionActions(1);
+        final Creature dead = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        dead.setAmount(0);
+
+        resurector.resurrect(dead);
+        assertThat(dead.getAmount()).isEqualTo(2); //2*100/100 = 2
+
+        dead.setAmount(0);
+        resurector.setResurrectionActions(1);
+        resurector.setResurrectHpValue(200);
+        resurector.resurrect(dead);
+        assertThat(dead.getAmount()).isEqualTo(4);//2*200/100 = 4
+    }
+    @Test
+    void creatureShouldResurrectWithLimitation(){
+        final Creature resurector = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .amount(2)
+                .build();
+        resurector.setResurrectionActions(1);
+        final Creature dead = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        dead.setAmount(0);
+
+        resurector.resurrect(dead);
+        assertThat(dead.getAmount()).isEqualTo(2); //2*100/100 = 2
+
+        resurector.resurrect(dead);
+        assertThat(dead.getAmount()).isEqualTo(2);
+    }
+
+    @Test
+    void resurrectedUnitCanAttack(){
+        final Creature resurector = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .amount(2)
+                .build();
+        resurector.setResurrectionActions(1);
+        final Creature dead = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        dead.setAmount(0);
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+
+        resurector.resurrect(dead);
+        assertThat(dead.getAmount()).isEqualTo(2); //2*100/100 = 2
+
+        dead.attack(defender);
+        assertThat(dead.getCurrentHp()).isEqualTo(95);
+        assertThat(defender.getCurrentHp()).isEqualTo(90);
+    }
+
 
     @Test
     void creatureShouldHaveTwoCounters() {

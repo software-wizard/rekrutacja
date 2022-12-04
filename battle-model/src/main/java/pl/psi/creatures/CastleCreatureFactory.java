@@ -86,6 +86,18 @@ public class CastleCreatureFactory {
                             .amount(aAmount)
                             .build();
                     return new ChargingDecorator(creature3);
+                case 7:
+                    Creature creature4 = new Creature.Builder().statistic(CreatureStatistic.ARCHANGEL)
+                            .amount(aAmount)
+                            .build();
+                    Map<String, Double> units = Map.ofEntries(
+                            entry("Devil",1.5),
+                            entry("Skeleton",2.0)
+                    );
+                    MoreDamageForSomeUnitsDecorator archangel = new MoreDamageForSomeUnitsDecorator(creature4,units);
+                    archangel.setResurrectionActions(1);
+                    return archangel;
+
             }
         }
         throw new IllegalArgumentException("Cannot recognize creature by tier and upgrade or not.");

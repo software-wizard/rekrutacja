@@ -52,9 +52,10 @@ public class Start extends Application {
                 new Hero(List.of(
                         new WarMachinesFactory().create(1, 1, new DefaultDamageCalculator(new Random()), 1),
                         new CastleCreatureFactory().create(3, false, 15),
-                        new CastleCreatureFactory().create(2, true, 50),
+                        new CastleCreatureFactory().create(2, true, 1),
                         new CastleCreatureFactory().create(6, true, 3),
-                        new CastleCreatureFactory().create(7, false, 2)
+                        new CastleCreatureFactory().create(7, false, 2),
+                        new CastleCreatureFactory().create(7, true, 2)
                 ), HeroStatistics.NECROMANCER,
                         SpellsBook.builder().spells(List.of(
                                 new SpellFactory().create(HASTE, BASIC, 2),
@@ -106,7 +107,7 @@ public class Start extends Application {
                 new StrongholdFactory().create(true, 2, 3),
                 new WarMachinesFactory().create(4, 1, new DefaultDamageCalculator(new Random()), 1),
                 new WarMachinesFactory().create(2, 1, new DefaultDamageCalculator(new Random()), 1),
-                new StrongholdFactory().create(false, 3, 25),
+                new StrongholdFactory().create(false, 3, 100),
                 new NecropolisFactory().create(false,1,30)
         ), HeroStatistics.KNIGHT,
                 SpellsBook.builder().spells(List.of(

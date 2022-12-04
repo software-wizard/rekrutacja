@@ -83,6 +83,7 @@ public class TurnQueue {
         return deadCreaturePoints;
     }
 
+    //also delete creatures and points
     public void addDeadCreaturePoint(final Point point){
         if(deadCreaturePoints.contains(point)){
             int i = deadCreaturePoints.indexOf(point);
