@@ -46,6 +46,7 @@ public class Creature implements PropertyChangeListener, Comparable<Creature>, S
     private double lastAttackDamage;
     private double lastCounterAttackDamage;
     private Queue<Spell> runningSpells;
+    private int traversedFieldsNumber;
 
     Creature() {
         runningSpells = new LinkedList<>();

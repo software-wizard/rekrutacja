@@ -52,7 +52,8 @@ public class Start extends Application {
                 new Hero(List.of(
                         new WarMachinesFactory().create(1, 1, new DefaultDamageCalculator(new Random()), 1),
                         new CastleCreatureFactory().create(3, false, 15),
-                        new CastleCreatureFactory().create(2, true, 50)
+                        new CastleCreatureFactory().create(2, true, 50),
+                        new CastleCreatureFactory().create(6, true, 3)
                 ), HeroStatistics.NECROMANCER,
                         SpellsBook.builder().spells(List.of(
                                 new SpellFactory().create(HASTE, BASIC, 2),

@@ -161,6 +161,9 @@ public class GameEngine {
     public void move(final Point aPoint) {
         if (getCreature(aPoint).isEmpty() || !getCreature(aPoint).get().isAlive()) {
             board.move(turnQueue.getCurrentCreature(), aPoint);
+
+            //adding the distance traveled by the single-unit
+            turnQueue.getCurrentCreature().setTraversedFieldsNumber(turnQueue.getCurrentCreature().getTraversedFieldsNumber()+1);
         }
     }
 

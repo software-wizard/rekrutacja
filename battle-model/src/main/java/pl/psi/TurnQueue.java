@@ -94,7 +94,6 @@ public class TurnQueue {
 
     public void next() {
         List<Creature> collect = creatures.stream().filter(Creature::isAlive).collect(Collectors.toList());
-
         if(collect.isEmpty()) {
             return;
         }
@@ -103,6 +102,10 @@ public class TurnQueue {
         if (creaturesQueue.isEmpty()) {
             if (waitingCreaturesQueue.isEmpty()) {
                 endOfTurn();
+                //removing the units travers info from the previous turn
+                for(Creature creature: getCreatures()){
+                    creature.setTraversedFieldsNumber(0);
+                }
                 next();
             } else {
                 currentCreature = waitingCreaturesQueue.poll();

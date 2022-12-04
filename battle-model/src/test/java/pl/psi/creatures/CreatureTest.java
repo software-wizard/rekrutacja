@@ -632,6 +632,63 @@ public class CreatureTest {
             assertThat(defender.getCurrentHp()).isEqualTo(98);
 
     }
+    @Test
+    void chargingCreatureShouldCharge(){
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        final ChargingDecorator attacker = new ChargingDecorator(decorated);
+
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+
+        attacker.setTraversedFieldsNumber(5);
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(95);
+        int result = (100-(int)(Math.pow(1.05,5)*5));
+        assertThat(defender.getCurrentHp()).isEqualTo(result);
+
+        attacker.setTraversedFieldsNumber(0);
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(95);
+        result = result-(int)(Math.pow(1.05,0)*5);
+        assertThat(defender.getCurrentHp()).isEqualTo(result);
+
+        attacker.setTraversedFieldsNumber(20);
+        attacker.attack(defender);
+        assertThat(attacker.getCurrentHp()).isEqualTo(95);
+        result = result-(int)(Math.pow(1.05,20)*5);
+        assertThat(defender.getCurrentHp()).isEqualTo(result);
+
+    }
+    @Test
+    void chargingCreatureShouldHasZeroTraversedFieldsAfterTurn(){
+        final Creature decorated = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        final ChargingDecorator attacker = new ChargingDecorator(decorated);
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(5, 5))
+                        .build())
+                .build();
+        final TurnQueue turnQueue = new TurnQueue(List.of(attacker), List.of(defender));
+
+
+        attacker.setTraversedFieldsNumber(10);
+        assertThat(attacker.getTraversedFieldsNumber()).isEqualTo(10);
+        turnQueue.next();
+        turnQueue.next();
+        assertThat(attacker.getTraversedFieldsNumber()).isEqualTo(0);
+
+    }
 
     @Test
     void creatureShouldHaveTwoCounters() {
