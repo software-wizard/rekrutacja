@@ -161,6 +161,9 @@ public class GameEngine {
     public void move(final Point aPoint) {
         if (getCreature(aPoint).isEmpty() || !getCreature(aPoint).get().isAlive()) {
             board.move(turnQueue.getCurrentCreature(), aPoint);
+
+            //adding the distance traveled by the single-unit
+            turnQueue.getCurrentCreature().setTraversedFieldsNumber(turnQueue.getCurrentCreature().getTraversedFieldsNumber()+1);
         }
     }
 
@@ -195,6 +198,22 @@ public class GameEngine {
                 .ifPresent(firstAidTent::healCreature);
         pass();
         observerSupport.firePropertyChange(CREATURE_MOVED, null, null);
+    }
+    public void resurrect(final Point aPoint) {
+        Creature creature = (Creature) turnQueue.getCurrentCreature();
+        board.getCreature(aPoint)
+                .ifPresent(creature::resurrect);
+        turnQueue.addDeadCreaturePoint(aPoint);
+        pass();
+        observerSupport.firePropertyChange(CREATURE_MOVED, null, null);
+    }
+    public boolean canResurrect(final Point aPoint){
+        if(getCreature(aPoint).isPresent()
+                && !getCreature(aPoint).get().isAlive()
+                && isCreatureAllied(getCreature(aPoint).get())
+                && getCurrentCreature().getResurrectionActions()>0){
+            return true;
+        }else {return false;}
     }
 
     public String getAttackInformation() {
@@ -433,7 +452,7 @@ public class GameEngine {
     }
 
 
-    private boolean isCreatureAllied(Creature creature) {
+    public boolean isCreatureAllied(Creature creature) {
         return getCurrentHero().getCreatures().contains(creature);
     }
 

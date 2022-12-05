@@ -34,7 +34,7 @@ public class ShooterCreatureDecorator extends AbstractCreature {
         }
     }
 
-    private void attackRange(final Creature aDefender) {
+     public void attackRange(final Creature aDefender) {
         final int damage = getCalculator().calculateDamage(decorated, aDefender);
         decorated.applyDamage(aDefender, damage);
         shots -= 1;

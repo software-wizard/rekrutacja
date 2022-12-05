@@ -46,6 +46,9 @@ public class Creature implements PropertyChangeListener, Comparable<Creature>, S
     private double lastAttackDamage;
     private double lastCounterAttackDamage;
     private Queue<Spell> runningSpells;
+    private int traversedFieldsNumber;
+    private int resurrectionActions = 0;
+    private int resurrectHpValue = 100;
 
     Creature() {
         runningSpells = new LinkedList<>();
@@ -387,6 +390,14 @@ public class Creature implements PropertyChangeListener, Comparable<Creature>, S
             } else {
                 throw new RuntimeException("Creature is not defending.");
             }
+        }
+    }
+    //restored allyUnits = restoringUnits(number) * resurrectHpValue / allyUnitHP
+    public void resurrect(Creature ally){
+        if(getResurrectionActions()>0) {
+            int restoreUnitsAmount = (int) ((getAmount() * resurrectHpValue) / ally.getBasicStats().getMaxHp());
+            ally.setAmount(restoreUnitsAmount);
+            setResurrectionActions(getResurrectionActions()-1);
         }
     }
 
