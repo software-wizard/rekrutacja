@@ -169,10 +169,7 @@ public class Board {
     public void putDeadCreaturesOnBoard(List<Creature> aCreaturesList, List<Point> aPointList) {
         for(int i = 0; i <aCreaturesList.size(); i++){
             int finalI = i;
-
-            //after resurrected unit move and then is killed again this line below breaks program,
-            //however everything works well without it
-            //map.computeIfAbsent(aPointList.get(i), k -> aCreaturesList.get(finalI));
+            map.computeIfAbsent(aPointList.get(i), k -> aCreaturesList.get(finalI));
         }
     }
 }
