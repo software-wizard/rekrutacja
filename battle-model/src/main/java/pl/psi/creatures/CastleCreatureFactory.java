@@ -1,10 +1,5 @@
 package pl.psi.creatures;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.util.Map.entry;
-
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
@@ -33,10 +28,9 @@ public class CastleCreatureFactory {
                     AreaDamageOnAttackCreatureDecorator areaDamageOnAttackCreature = new AreaDamageOnAttackCreatureDecorator( creature,area );
                     return new ShooterCreatureDecorator( areaDamageOnAttackCreature, 24 );
                 case 3:
-                    Creature griffin =  new Creature.Builder().statistic(CreatureStatistic.GRIFFIN)
+                    return new Creature.Builder().statistic(CreatureStatistic.GRIFFIN)
                             .amount(aAmount)
                             .build();
-                    return new MoreCounterAttacksCreatureDecorator(griffin,2);
                 case 4:
                     return new Creature.Builder().statistic(CreatureStatistic.SWORDSMAN)
                             .amount(aAmount)
@@ -46,16 +40,6 @@ public class CastleCreatureFactory {
                             .amount(aAmount)
                             .build();
                     return new ShooterCreatureDecorator( creature2, 12 );
-
-                case 7:
-                    Creature creature3 = new Creature.Builder().statistic(CreatureStatistic.ANGEL)
-                            .amount(aAmount)
-                            .build();
-                    Map<String, Double> units = Map.ofEntries(
-                            entry("Devil",1.5),
-                            entry("Skeleton",2.0)
-                    );
-                    return new MoreDamageForSomeUnitsDecorator(creature3,units);
             }
         } else {
             switch (aTier) {
@@ -67,7 +51,7 @@ public class CastleCreatureFactory {
                     Creature creature = new Creature.Builder().statistic(CreatureStatistic.MARKSMAN)
                             .amount(aAmount)
                             .build();
-                            return new ShooterCreatureDecoratorDoubleAttack(creature,24);
+                    return new ShooterCreatureDecorator( creature, 24 );
                 case 3:
                     return new Creature.Builder().statistic(CreatureStatistic.ROYAL_GRIFFIN)
                             .amount(aAmount)
@@ -81,23 +65,6 @@ public class CastleCreatureFactory {
                             .amount(aAmount)
                             .build();
                     return new ShooterCreatureDecorator( creature2, 24 );
-                case 6:
-                    Creature creature3 = new Creature.Builder().statistic(CreatureStatistic.CHAMPION)
-                            .amount(aAmount)
-                            .build();
-                    return new ChargingDecorator(creature3);
-                case 7:
-                    Creature creature4 = new Creature.Builder().statistic(CreatureStatistic.ARCHANGEL)
-                            .amount(aAmount)
-                            .build();
-                    Map<String, Double> units = Map.ofEntries(
-                            entry("Devil",1.5),
-                            entry("Skeleton",2.0)
-                    );
-                    MoreDamageForSomeUnitsDecorator archangel = new MoreDamageForSomeUnitsDecorator(creature4,units);
-                    archangel.setResurrectionActions(1);
-                    return archangel;
-
             }
         }
         throw new IllegalArgumentException("Cannot recognize creature by tier and upgrade or not.");

@@ -204,22 +204,6 @@ public class MainBattleController implements PropertyChangeListener {
                             });
                 }
 
-                //Resurrection mechanism
-                if(gameEngine.canResurrect(new Point(x1,y1))){
-
-                    mapTile.setOnMouseEntered(e -> {
-                        mapTile.getScene().setCursor(new ImageCursor(new Image("/images/spells images/Cast Coursor.gif")));
-                    });
-                    mapTile.setOnMouseExited(e -> {
-                        mapTile.getScene().setCursor(Cursor.DEFAULT);
-                    });
-                    mapTile.setOnMousePressed(
-                            e -> {
-                                if (e.getButton() == MouseButton.PRIMARY) {
-                                    gameEngine.resurrect(new Point(x1,y1));
-                                }
-                            });
-                }
                 if (gameEngine.getCreature(new Point(x1, y1)).isPresent()) {
                     if (gameEngine.getCreature(new Point(x, y)).get().isAlive()) {
                         mapTile.setName("\n\n" + gameEngine.getCreature(new Point(x, y)).get().getAmount());
